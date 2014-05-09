@@ -116,7 +116,7 @@ namespace Example
             return Read(_processor, x => Console.WriteLine("-p: {0}", string.Join(",", x)));
         }
 
-        private int Read(RingBufferReader reader, Action<IEnumerable<long>> callback)
+        private int Read(IRingBufferReader reader, Action<IEnumerable<long>> callback)
         {
             long lastAvailable = reader.WaitAvailable();
 

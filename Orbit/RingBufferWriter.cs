@@ -1,6 +1,6 @@
 ﻿namespace Codestellation.Orbit
 {
-    public class RingBufferWriter : RingBufferBarrier
+    public class RingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
         private readonly int _bufferSize;
         private long _lastFree;

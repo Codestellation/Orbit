@@ -42,6 +42,8 @@
     <Compile Include="BlockingWaitStrategy.cs" />
     <Compile Include="ConcurrentRingBufferWriter.cs" />
     <Compile Include="Cpu.cs" />
+    <Compile Include="IRingBufferReader.cs" />
+    <Compile Include="IRingBufferWriter.cs" />
     <Compile Include="IWaitStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RingBuffer.cs" />

@@ -2,7 +2,7 @@
 
 namespace Codestellation.Orbit
 {
-    public class ConcurrentRingBufferWriter : RingBufferBarrier
+    public class ConcurrentRingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
         private readonly int _bufferSize;
         private long _nextFree;

@@ -1,6 +1,6 @@
 ﻿namespace Codestellation.Orbit
 {
-    public class RingBufferReader : RingBufferBarrier
+    public class RingBufferReader : RingBufferBarrier, IRingBufferReader
     {
         public RingBufferReader(IWaitStrategy waitStrategy)
             : base(waitStrategy)
