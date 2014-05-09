@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlockingWaitStrategy.cs" />
+    <Compile Include="ConcurrentRingBufferWriter.cs" />
     <Compile Include="Cpu.cs" />
     <Compile Include="IWaitStrategy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
