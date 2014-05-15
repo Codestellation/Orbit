@@ -1,41 +1,41 @@
-﻿using System.Threading;
-
-namespace Codestellation.Orbit
+﻿namespace Codestellation.Orbit
 {
     public class ConcurrentRingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
         private readonly int _bufferSize;
-        private long _nextFree;
-        private long _lastFree;
+        private readonly Sequence _nextFree;
+        private readonly Sequence _lastFree;
 
         public ConcurrentRingBufferWriter(int bufferSize, IWaitStrategy waitStrategy)
             : base(waitStrategy)
         {
             _bufferSize = bufferSize;
-            _lastFree = bufferSize - 1;
+            _nextFree = new Sequence();
+            _lastFree = new Sequence(bufferSize - 1);
         }
 
         public long Claim()
         {
-            long claimed;
-            do
+            long claimed = _nextFree.Increment();
+            long lastFree = _lastFree.VolatileGet();
+
+            if (claimed > lastFree)
             {
-                claimed = Volatile.Read(ref _nextFree);
-                long lastFree = Volatile.Read(ref _lastFree);
+                long newLastFree = WaitForAvailable(claimed - _bufferSize);
+                _nextFree.CompareAndSwap(newLastFree, lastFree);
+            }
 
-                if (claimed > lastFree)
-                {
-                    long tmp = WaitForAvailable(claimed - _bufferSize) + _bufferSize;
-                    Interlocked.CompareExchange(ref _lastFree, tmp, lastFree);
-                }
-
-            } while (Interlocked.CompareExchange(ref _nextFree, claimed + 1, claimed) != claimed);
             return claimed;
         }
 
         public void Commit(long position)
         {
-            WaitStrategy.WaitFor(position, Cursor);
+            long lazyCursorValue = Cursor.Get();
+            if (lazyCursorValue < position)
+            {
+                WaitStrategy.WaitFor(position, Cursor);
+            }
+
             Cursor.VolatileSet(position + 1);
             WaitStrategy.Signal();
         }
