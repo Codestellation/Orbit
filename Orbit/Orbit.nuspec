@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<package >
+    <metadata>
+        <id>Codestellation.Orbit</id>
+        <version>0.1</version>
+        <authors>Codestellation team</authors>
+        <projectUrl>https://github.com/Codestellation/Orbit</projectUrl>
+        <description>High performance inter-process messaging</description>
+        <copyright>Copyright (c) 2014 Codestellation</copyright>
+        <tags>ringbuffer concurrency latency throughput</tags>
+    </metadata>
+</package>
