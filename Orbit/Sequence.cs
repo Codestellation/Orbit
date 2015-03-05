@@ -19,6 +19,20 @@ namespace Codestellation.Orbit
         {
             return _value;
         }
+        
+        public long Increment()
+        {
+            var result = _value;
+            _value++;
+            return result;
+        }
+        
+        public long Increment(int count)
+        {
+            var result = _value;
+            _value += count;
+            return result;
+        }
 
         public void VolatileSet(long value)
         {
@@ -35,9 +49,14 @@ namespace Codestellation.Orbit
             return Interlocked.CompareExchange(ref _value, value, comparand);
         }
 
-        public long Increment()
+        public long InterlockedIncrement()
         {
             return Interlocked.Increment(ref _value) - 1;
+        }
+
+        public long InterlockedIncrement(int count)
+        {
+            return Interlocked.Add(ref _value, count) - 1;
         }
 
         public override string ToString()

@@ -2,8 +2,8 @@
 {
     public class RingBufferBarrier
     {
-        protected Sequence Cursor;
-        protected IWaitStrategy WaitStrategy;
+        protected readonly Sequence Cursor;
+        protected readonly IWaitStrategy WaitStrategy;
 
         private RingBufferBarrier[] _dependencies;
 

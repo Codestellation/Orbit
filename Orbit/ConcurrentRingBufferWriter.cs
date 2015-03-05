@@ -16,7 +16,7 @@
 
         public long Claim()
         {
-            long claimed = _nextFree.Increment();
+            long claimed = _nextFree.InterlockedIncrement();
             long lastFree = _lastFree.VolatileGet();
 
             if (claimed > lastFree)
@@ -28,15 +28,35 @@
             return claimed;
         }
 
+        public long Claim(int count)
+        {
+            long claimed = _nextFree.InterlockedIncrement(count);
+            long lastFree = _lastFree.VolatileGet();
+
+            if (claimed > lastFree)
+            {
+                long newLastFree = WaitForAvailable(claimed + count-1 - _bufferSize);
+                _nextFree.CompareAndSwap(newLastFree, lastFree);
+            }
+
+            return claimed - count;
+        }
+
         public void Commit(long position)
         {
+            Commit(position, 1);
+        }
+
+        public void Commit(long position, int count)
+        {
             long lazyCursorValue = Cursor.Get();
+
             if (lazyCursorValue < position)
             {
                 WaitStrategy.WaitFor(position, Cursor);
             }
 
-            Cursor.VolatileSet(position + 1);
+            Cursor.VolatileSet(position + count);
             WaitStrategy.Signal();
         }
     }

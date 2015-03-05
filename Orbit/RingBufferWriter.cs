@@ -1,4 +1,6 @@
-﻿namespace Codestellation.Orbit
+﻿using System;
+
+namespace Codestellation.Orbit
 {
     public class RingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
@@ -14,17 +16,27 @@
 
         public long Claim()
         {
-            long claimed = Cursor.Get();
+            return Claim(1);
+        }
+
+        public long Claim(int count)
+        {
+            long claimed = Cursor.Increment(count);
             if (claimed > _lastFree)
             {
-                _lastFree = WaitForAvailable(claimed - _bufferSize) + _bufferSize;
+                _lastFree = WaitForAvailable(claimed - _bufferSize + count) + _bufferSize;
             }
             return claimed;
         }
 
         public void Commit(long position)
         {
-            Cursor.VolatileSet(position + 1);
+            Commit(position, 1);
+        }
+
+        public void Commit(long position, int count)
+        {
+            Cursor.VolatileSet(position + count);
             WaitStrategy.Signal();
         }
     }
