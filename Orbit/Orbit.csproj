@@ -54,6 +54,7 @@
     <Compile Include="RingBufferReader.cs" />
     <Compile Include="RingBufferWriter.cs" />
     <Compile Include="Sequence.cs" />
+    <Compile Include="Volatile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Orbit.nuspec" />
