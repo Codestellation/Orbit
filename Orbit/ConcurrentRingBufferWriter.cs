@@ -16,16 +16,7 @@
 
         public long Claim()
         {
-            long claimed = _nextFree.InterlockedIncrement();
-            long lastFree = _lastFree.VolatileGet();
-
-            if (claimed > lastFree)
-            {
-                long newLastFree = WaitForAvailable(claimed - _bufferSize);
-                _nextFree.CompareAndSwap(newLastFree, lastFree);
-            }
-
-            return claimed;
+            return Claim(1);
         }
 
         public long Claim(int count)
