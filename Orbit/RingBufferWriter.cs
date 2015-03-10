@@ -39,9 +39,10 @@ namespace Codestellation.Orbit
         {
             long lazyCursorValue = Cursor.Get();
             //BUG: single thread writer could not rely on wait strategy because cursor must be moved by itself. Self-deadlock.
-            if (lazyCursorValue + count <= position)
+            var positionToWait = position - count;
+            if (positionToWait <= lazyCursorValue)
             {
-                WaitStrategy.WaitFor(position, Cursor);
+                WaitStrategy.WaitFor(positionToWait, Cursor);
             }
 
             Cursor.VolatileSet(position + 1);

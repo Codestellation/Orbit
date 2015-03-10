@@ -38,11 +38,12 @@ namespace Codestellation.Orbit
 
         public void Commit(long position, long count)
         {
-            long lazyCursorValue = Cursor.Get();
+            long lazyCursorValue = Cursor.VolatileGet();
 
-            if (lazyCursorValue + count <= position)
+            var positionToWait = position - count;
+            if (positionToWait <= lazyCursorValue)
             {
-                WaitStrategy.WaitFor(position, Cursor);
+                WaitStrategy.WaitFor(positionToWait, Cursor);
             }
 
             Cursor.VolatileSet(position + 1);

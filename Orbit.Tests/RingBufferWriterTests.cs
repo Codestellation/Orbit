@@ -43,8 +43,8 @@ namespace Codestellation.Orbit.Tests
             Assert.That(first, Is.EqualTo(2));
             Assert.That(second, Is.EqualTo(6));
 
-            writer.Commit(first, 3);
             writer.Commit(second, 4);
+            writer.Commit(first, 3);
         }
     }
 }
