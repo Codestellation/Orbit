@@ -40,7 +40,7 @@ namespace Codestellation.Orbit
         {
             long lazyCursorValue = Cursor.Get();
 
-            if (lazyCursorValue + count < position)
+            if (lazyCursorValue + count <= position)
             {
                 WaitStrategy.WaitFor(position, Cursor);
             }

@@ -2,7 +2,7 @@
 
 namespace Codestellation.Orbit
 {
-    [DebuggerDisplay("Cursor={Cursor}; Last Free={_lastFree}")]
+    [DebuggerDisplay("Cursor={Cursor}; Next Free={_nextFree}; Last Free={_lastFree}")]
     public class RingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
         private readonly int _bufferSize;
