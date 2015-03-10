@@ -2,6 +2,7 @@
 {
     public class RingBufferBarrier
     {
+        private static readonly RingBufferBarrier[] EmptyDependencies = new RingBufferBarrier[0];
         protected readonly Sequence Cursor;
         protected readonly IWaitStrategy WaitStrategy;
 
@@ -11,6 +12,7 @@
         {
             Cursor = new Sequence();
             WaitStrategy = waitStrategy;
+            _dependencies = EmptyDependencies;
         }
 
         protected long WaitForAvailable(long waitingPosition)
@@ -33,7 +35,7 @@
 
         public void DependsOn(params RingBufferBarrier[] dependencies)
         {
-            _dependencies = dependencies;
+            _dependencies = dependencies ?? EmptyDependencies;
         }
     }
 }

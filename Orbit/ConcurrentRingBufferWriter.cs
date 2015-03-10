@@ -1,5 +1,8 @@
-﻿namespace Codestellation.Orbit
+﻿using System.Diagnostics;
+
+namespace Codestellation.Orbit
 {
+    [DebuggerDisplay("Cursor={Cursor}; Next Free={_nextFree}; Last Free={_lastFree}")]
     public class ConcurrentRingBufferWriter : RingBufferBarrier, IRingBufferWriter
     {
         private readonly int _bufferSize;
@@ -26,28 +29,23 @@
 
             if (claimed > lastFree)
             {
-                long newLastFree = WaitForAvailable(claimed + count-1 - _bufferSize);
+                long newLastFree = WaitForAvailable(claimed - _bufferSize);
                 _nextFree.CompareAndSwap(newLastFree, lastFree);
             }
 
-            return claimed - count;
+            return claimed;
         }
 
-        public void Commit(long position)
-        {
-            Commit(position, 1);
-        }
-
-        public void Commit(long position, int count)
+        public void Commit(long position, long count)
         {
             long lazyCursorValue = Cursor.Get();
 
-            if (lazyCursorValue < position)
+            if (lazyCursorValue + count < position)
             {
                 WaitStrategy.WaitFor(position, Cursor);
             }
 
-            Cursor.VolatileSet(position + count);
+            Cursor.VolatileSet(position + 1);
             WaitStrategy.Signal();
         }
     }

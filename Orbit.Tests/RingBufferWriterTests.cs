@@ -27,8 +27,24 @@ namespace Codestellation.Orbit.Tests
             var first = writer.Claim(3);
             var second = writer.Claim(4);
             
-            Assert.That(first, Is.EqualTo(0));
-            Assert.That(second, Is.EqualTo(3));
+            Assert.That(first, Is.EqualTo(2));
+            Assert.That(second, Is.EqualTo(6));
+        }
+        
+        [Test]
+        public void Should_return_correct_values_for_multiclaim2()
+        {
+            var blockingWaitStrategy = new BlockingWaitStrategy();
+            var writer = new ConcurrentRingBufferWriter(5, blockingWaitStrategy);
+
+            var first = writer.Claim(3);
+            var second = writer.Claim(4);
+            
+            Assert.That(first, Is.EqualTo(2));
+            Assert.That(second, Is.EqualTo(6));
+
+            writer.Commit(first, 3);
+            writer.Commit(second, 4);
         }
     }
 }

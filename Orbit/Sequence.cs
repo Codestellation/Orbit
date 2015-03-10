@@ -1,10 +1,12 @@
-﻿using System.Globalization;
+﻿using System.Diagnostics;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Threading;
 
 namespace Codestellation.Orbit
 {
     [StructLayout(LayoutKind.Explicit, Size = Cpu.CacheLineSize * 2)]
+    [DebuggerDisplay("{_value}")]
     public class Sequence
     {
         [FieldOffset(Cpu.CacheLineSize)]
@@ -19,19 +21,10 @@ namespace Codestellation.Orbit
         {
             return _value;
         }
-        
-        public long Increment()
-        {
-            var result = _value;
-            _value++;
-            return result;
-        }
-        
+
         public long Increment(int count)
         {
-            var result = _value;
-            _value += count;
-            return result;
+            return (_value += count) - 1;
         }
 
         public void VolatileSet(long value)
@@ -47,11 +40,6 @@ namespace Codestellation.Orbit
         public long CompareAndSwap(long value, long comparand)
         {
             return Interlocked.CompareExchange(ref _value, value, comparand);
-        }
-
-        public long InterlockedIncrement()
-        {
-            return Interlocked.Increment(ref _value) - 1;
         }
 
         public long InterlockedIncrement(int count)

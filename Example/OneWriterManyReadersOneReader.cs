@@ -88,7 +88,7 @@ namespace Example
             long sequence = _committer.Claim();
             _buffer[sequence] = value;
             Console.WriteLine("+c: {0}", value);
-            _committer.Commit(sequence);
+            _committer.Commit(sequence, 1);
         }
 
         private int JournalNext()

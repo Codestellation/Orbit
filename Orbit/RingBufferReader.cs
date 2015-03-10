@@ -1,5 +1,8 @@
-﻿namespace Codestellation.Orbit
+﻿using System.Diagnostics;
+
+namespace Codestellation.Orbit
 {
+    [DebuggerDisplay("Cursor={Cursor}")]
     public class RingBufferReader : RingBufferBarrier, IRingBufferReader
     {
         public RingBufferReader(IWaitStrategy waitStrategy)
