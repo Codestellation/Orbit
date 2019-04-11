@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>Codestellation.Orbit.Example</AssemblyName>
+    <RootNamespace>Codestellation.Orbit.Example</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <NoWarn>7035</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Orbit\Orbit.csproj" />
+  </ItemGroup>
+
+</Project>

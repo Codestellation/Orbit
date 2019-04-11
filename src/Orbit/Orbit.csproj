@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Codestellation Team</Authors>
+    <Company>Codestellation</Company>
+    <Description>High performance inter-process messaging</Description>
+    <Copyright>Copyright (c) Codestellation 2019</Copyright>
+    <PackageId>Codestellation.Orbit</PackageId>
+    <PackageProjectUrl>https://github.com/codestellation/orbit</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/codestellation/orbit</RepositoryUrl>
+    <AssemblyName>Codestellation.Orbit</AssemblyName>
+    <RootNamespace>Codestellation.Orbit</RootNamespace>
+    <NoWarn>7035;1591</NoWarn>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Codestellation.Cepheid" Version="0.1.2" PrivateAssets="All" />
+  </ItemGroup>
+
+</Project>

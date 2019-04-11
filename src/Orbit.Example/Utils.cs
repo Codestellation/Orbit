@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Example
+namespace Codestellation.Orbit.Example
 {
     public static class Utils
     {

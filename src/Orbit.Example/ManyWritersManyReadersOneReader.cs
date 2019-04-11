@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Codestellation.Orbit;
 
-namespace Example
+namespace Codestellation.Orbit.Example
 {
     class ManyWritersManyReadersOneReader
     {

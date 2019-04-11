@@ -1,20 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orbit", "Orbit\Orbit.csproj", "{2CC42936-436D-4E02-BCE2-4568D4E870CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orbit.Tests", "Orbit.Tests\Orbit.Tests.csproj", "{97FC04D1-BBB8-48F4-B119-8AAEDF7A1FEA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E24F938E-34C8-4CF8-956C-69990448458E}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\packages.config = .nuget\packages.config
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{E0A5E6F7-306B-4775-B2AA-372420C26162}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orbit.Example", "Orbit.Example\Orbit.Example.csproj", "{E0A5E6F7-306B-4775-B2AA-372420C26162}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

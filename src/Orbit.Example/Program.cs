@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Example
+namespace Codestellation.Orbit.Example
 {
     internal class Program
     {
