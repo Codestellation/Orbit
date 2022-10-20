@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 
 namespace Codestellation.Orbit
 {
@@ -43,7 +43,7 @@ namespace Codestellation.Orbit
             var positionToWait = position - count;
             if (positionToWait <= lazyCursorValue)
             {
-                WaitStrategy.WaitFor(positionToWait, Cursor);
+                WaitStrategy.WaitFor(positionToWait + 1, Cursor);
             }
 
             Cursor.VolatileSet(position + 1);
